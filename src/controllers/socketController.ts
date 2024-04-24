@@ -11,7 +11,13 @@ import socketIO from 'socket.io-client';
 // import { Server } from 'socket.io';
 // let socket: Socket;
 
-let socket: any; 
+// let socket: any; 
+
+declare global {
+    var socket: any;
+  }
+
+
 async function InitIo() {
     
     const serverAddress = "https://7c79-190-96-238-73.ngrok-free.app/";
@@ -25,8 +31,8 @@ async function InitIo() {
         query: { "x-token": token }
     });
 
-    
 
+    globalThis.socket = socket;
 
 
     // io.opts.query = { "x-token": token };
@@ -50,7 +56,7 @@ async function InitIo() {
 }
 
 
-export {InitIo, socket}
+export {InitIo}
 
 // io.on("connection", (socket) => {
 //     console.log(`socket ${socket.id} connected`);

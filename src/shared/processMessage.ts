@@ -4,10 +4,11 @@ import { GetMessageChatGPT } from "../services/chatGPTService";
 import { MensajeModel } from "../models/chatModel";
 import { } from "../flows/livuyaarflow"
 import { addPhoneNumber, checkPhoneNumber } from "../data/datasource";
-import { socket } from "../controllers/socketController";
+// import { socket } from "../controllers/socketController";
+// import { InitIo, socket } from '../controllers/socketController';
 
 import AIClass from "../services/GTP-Completions"
-import { Socket } from "socket.io-client";
+// import { Socket } from "socket.io-client";
 require('dotenv').config();
 
 const apiKey: string | undefined = process.env.apiKeyOpenAI;
@@ -68,7 +69,20 @@ async function Process(textUser: string, number: string) {
       //     console.log(data);
       // })
 
-        // socket.emit('numeroWpp', { mensaje: 'Hola desde elcontroller' });
+        socket.emit('numeroWpp', { mensaje: '3108573835' });
+
+      //   InitIo().then(() => {
+      //     console.log('el socket', socket);
+      //     // Aquí puedes usar socket ya que se ha inicializado correctamente
+      //     if (socket) {
+      //         socket.emit('mensaje', 'Hola desde otro archivo');
+      //     } else {
+      //         console.error('socket no está definido');
+      //     }
+      // }).catch(error => {
+      //     console.error('Error al inicializar socket:', error);
+      // });
+        
 
 
 
