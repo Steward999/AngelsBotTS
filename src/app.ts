@@ -7,7 +7,6 @@ require('dotenv').config();
 import { Server as HttpServer, createServer } from 'http';
 import { MongoDatabase } from "./data/mongoDB";
 // import { io,  } from "socket.io-client";
-import socketIO from 'socket.io-client';
 
 import { InitIo } from "./controllers/socketController";
 
@@ -39,12 +38,13 @@ httpServer.listen(3000, () => {
 });
 // app.listen(PORT, () => console.log("El puerto es: " + PORT));
 
-const serverAddress = "https://7c79-190-96-238-73.ngrok-free.app/";
+// const serverAddress = "https://7c79-190-96-238-73.ngrok-free.app/";
 
 // const socket = io(serverAddress);
 // Asignar el objeto socket globalmente
-const io = socketIO(serverAddress);
 // (global as any).io = socket;
 
 // export { io };
-InitIo(io);
+
+// const io = socketIO(serverAddress);
+InitIo();

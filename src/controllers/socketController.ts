@@ -4,27 +4,36 @@
 import { checkPhoneNumber } from "../data/datasource";
 require('dotenv').config();
 
-const serverAddress = "https://7c79-190-96-238-73.ngrok-free.app/";
+import socketIO from 'socket.io-client';
 
 
 
+// import { Server } from 'socket.io';
 // let socket: Socket;
 
+let socket: any; 
+async function InitIo() {
+    
+    const serverAddress = "https://7c79-190-96-238-73.ngrok-free.app/";
 
-async function InitIo(io:any) {
     
     let response = await checkPhoneNumber("573102605806");
     let token = response["token"];
-    console.log(response);
+    console.log(token);
+
+    const socket = socketIO(serverAddress, {
+        query: { "x-token": token }
+    });
+
     
-    io.io.opts.query = { "x-token": token };
 
-    // io = io(serverAddress, {
-    //     query: { "x-token":token }
-    // });
 
+
+    // io.opts.query = { "x-token": token };
+    // console.log(io.io.opts.query);
+    
     // Manejar eventos de conexión
-    io.on('prueba', (data:any) => {
+    socket.on('prueba', (data:any) => {
 
         console.log('Conectado al servidor de sockets');
         console.log(data);
@@ -33,15 +42,15 @@ async function InitIo(io:any) {
 
 
     // Manejar eventos de desconexión
-    // socket.on('disconnect', () => {
-    //     console.log('Desconectado del servidor de sockets');
-    // });
+    socket.on('disconnect', () => {
+        console.log('Desconectado del servidor de sockets');
+    });
 
 
 }
 
 
-export {InitIo}
+export {InitIo, socket}
 
 // io.on("connection", (socket) => {
 //     console.log(`socket ${socket.id} connected`);

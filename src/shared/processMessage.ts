@@ -4,7 +4,7 @@ import { GetMessageChatGPT } from "../services/chatGPTService";
 import { MensajeModel } from "../models/chatModel";
 import { } from "../flows/livuyaarflow"
 import { addPhoneNumber, checkPhoneNumber } from "../data/datasource";
-// import { io } from "../app";
+import { socket } from "../controllers/socketController";
 
 import AIClass from "../services/GTP-Completions"
 import { Socket } from "socket.io-client";
@@ -67,6 +67,11 @@ async function Process(textUser: string, number: string) {
       //     console.log('Conectado al servidor de sockets');
       //     console.log(data);
       // })
+
+        // socket.emit('numeroWpp', { mensaje: 'Hola desde elcontroller' });
+
+
+
         const prompt = `🪽Hola linda, lee la siguiente información para poder asesorarte: 
 
         Ten en cuenta que en todas las aplicaciones podrás ver y hacer contenido explicito: (No descargar desde el Play Store). 
