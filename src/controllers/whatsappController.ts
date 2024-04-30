@@ -1,11 +1,8 @@
 import fs from "fs";
 import { Request, Response } from "express";
 import { Process } from "../shared/processMessage";
-import { io } from "socket.io-client";
 const myConsole = new console.Console(fs.createWriteStream("./logs.txt"));
 
-const serverAddress = "https://e9d6-190-96-158-246.ngrok-free.app/";
-const socket = io(serverAddress);
 
 const VerfyToken = (req: Request, res: Response) => {
     try {
@@ -15,7 +12,7 @@ const VerfyToken = (req: Request, res: Response) => {
 
         if (challenge != null && token != null && token == accessToken) {
             console.log("Token correcto");
-            
+
             res.send(challenge);
         } else {
             res.status(400).send("Token incorrecto");
@@ -36,13 +33,16 @@ const RecivedMessage = async (req: Request, res: Response) => {
         const messageObject = value["messages"];
 
         if (typeof messageObject !== "undefined") {
+            console.log("MessageObject: ", messageObject);
+            socket.emit('numeroWpp', messageObject);
+            
             const messages = messageObject[0];
             number = messages["from"];
             const text = GetTextUser(messages);
             // myConsole.log(`${number}: Dice: ${text}`);
             console.log(`${number}: Dice: ${text}`);
             if (text !== "") {
-                
+
                 await Process(text, number);
             }
         }

@@ -61,31 +61,10 @@ async function Process(textUser: string, number: string) {
       
       console.log(isPhoneNumberRegistered);
       if (isPhoneNumberRegistered.ok) {
-        
-        // const socket = (global as any).io("https://e9d6-190-96-158-246.ngrok-free.app/");
-        // socket.emit('numeroWpp', { mensaje: 'Hola desde Process' });
-      //   io.on('prueba', (data) => {
-      //     console.log('Conectado al servidor de sockets');
-      //     console.log(data);
-      // })
+        // const messageJson = { numero: number, mensaje: textUser }
+        // socket.emit('numeroWpp', messageJson);
 
-        socket.emit('numeroWpp', { mensaje: '3108573835' });
-
-      //   InitIo().then(() => {
-      //     console.log('el socket', socket);
-      //     // Aquí puedes usar socket ya que se ha inicializado correctamente
-      //     if (socket) {
-      //         socket.emit('mensaje', 'Hola desde otro archivo');
-      //     } else {
-      //         console.error('socket no está definido');
-      //     }
-      // }).catch(error => {
-      //     console.error('Error al inicializar socket:', error);
-      // });
-        
-
-
-
+   
         const prompt = `🪽Hola linda, lee la siguiente información para poder asesorarte: 
 
         Ten en cuenta que en todas las aplicaciones podrás ver y hacer contenido explicito: (No descargar desde el Play Store). 

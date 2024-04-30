@@ -1,6 +1,6 @@
 import { BackendResponse } from '../models/BackendResponse';
 
-const baseURL: String = "https://7c79-190-96-238-73.ngrok-free.app/";
+const baseURL: String = "https://69b3-191-104-230-232.ngrok-free.app/";
 
 export async function checkPhoneNumber(number: string): Promise<BackendResponse> {
     try {

@@ -20,7 +20,7 @@ declare global {
 
 async function InitIo() {
     
-    const serverAddress = "https://7c79-190-96-238-73.ngrok-free.app/";
+    const serverAddress = "https://69b3-191-104-230-232.ngrok-free.app/";
 
     
     let response = await checkPhoneNumber("573102605806");
