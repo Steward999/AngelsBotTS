@@ -7,6 +7,7 @@ class AIClass {
     private model: string
 
     constructor(apiKey: string, _model: string) {
+        
         this.openai = new OpenAI({ apiKey, timeout: 15 * 1000 });
         if (!apiKey || apiKey.length === 0) {
             throw new Error("OPENAI_KEY is missing");
@@ -32,13 +33,32 @@ class AIClass {
                 model: model ?? this.model,
                 messages,
                 temperature,
-                max_tokens: 326,
-                top_p: 0,
+                // max_tokens: 326,
+                // top_p: 0,
                 frequency_penalty: 0,
                 presence_penalty: 0,
             });
 
             return completion.choices[0].message.content;
+        } catch (err) {
+            console.error(err);
+            return "ERROR";
+        }
+    };
+
+    createEmbedding = async (
+        messages: string,
+        model: string,
+    ) => {
+        try {
+            const embeddings = await this.openai.embeddings.create({
+                model: model,
+                input: messages,
+                encoding_format: "float",
+            });
+            
+            
+            return embeddings.data[0].embedding;
         } catch (err) {
             console.error(err);
             return "ERROR";

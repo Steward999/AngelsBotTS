@@ -1,7 +1,4 @@
-import fs from "fs";
 import https from "https";
-
-const myConsole = new console.Console(fs.createWriteStream("./logs.txt"));
 
 function sendMessageWhatsApp(data: any) {
     const options: https.RequestOptions = {

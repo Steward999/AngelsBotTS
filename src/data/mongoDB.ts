@@ -8,19 +8,18 @@ interface Options {
 
 export class MongoDatabase {
 
+    static connection: mongoose.Connection;
 
-    static async connect(options: Options){
-
+    static async connect(options: Options) {
         // const {dbName, mongoUrl} = options;
-        const {mongoUrl} = options;
+        const { mongoUrl } = options;
 
- console.log(mongoUrl);
- 
+
         try {
 
             await mongoose.connect(mongoUrl, {
                 dbName: "AngelsBot",
-                
+
                 // family: 4,
             })
             // mongoose.connect("mongodb://localhost:27017/myStore",{
@@ -30,9 +29,16 @@ export class MongoDatabase {
             //         console.log("Conexion Exitosa a la Base de Datos");
 
             // });
-
             console.log('Mongo Connected');
-             // Seleccionar la base de datos y la colección
+            // MongoDatabase.connection = mongoose.connection;
+            // Verificar la conexión exitosa
+            const db = mongoose.connection;
+            db.on('error', console.error.bind(console, 'Error de conexión a MongoDB:'));
+            db.once('connection', () => {
+                console.log('Conexión exitosa a MongoDB');
+                // Guardar la conexión en la propiedad estática
+            });
+            MongoDatabase.connection = db;
             
             return true;
 
@@ -42,6 +48,7 @@ export class MongoDatabase {
         }
 
     }
+
 
 
 }
